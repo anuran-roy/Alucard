@@ -18,15 +18,6 @@ class SessionData:
 
     def addHistory(self, line):
         self.line = line.strip()
-        # print("addHistory() method invoked!")
-        # ls = None
-        # if "<-" in self.line:
-        #     ls = line.split("<-")
-        #     try:
-        #         self.var[ls[0]] = ls[1]
-        #     except:
-        #         print(f"{colors['FAIL']}Error logging variable.")
-
         self.history.append(line)
 
         if line.lower() == "history":
@@ -42,9 +33,6 @@ class SessionData:
             for i in self.var.keys():
                 print(f"{colors['OKGREEN']}{i}: {self.var[i]}")
             print(f"{colors['OKGREEN']}\n-----------\n")
-
-        # if ls is not None:
-        #     print(f"\n\n{colors['OKGREEN']}{ls[0]} = {self.var[ls[0]]}\n")
 
     def saveHistory(self):
         f = open("commands.txt", "w")

@@ -23,27 +23,18 @@ class ExecutionEngine(SessionData, Wolfram):
             "exit": "sys.exit(0)",
 
         }
-        # self.wolfram_commands = []
         self.config = yaml.safe_load(open("config.yaml", "r"))
-        # self.line = None
 
     def execute(self, to_exec):
-        # try:
         self.line = to_exec.strip()
         if self.line in self.environment_commands.keys():
             return exec(self.environment_commands[self.line])
-        # elif " " not in self.line:
-        #     return exec(self.line)
         elif self.line[:self.line.find(" ")] == self.config['WOLFRAM']:
             return self.session.evaluate(self.line[self.line.find(" ")+1:].strip())
         else:
             return exec(self.line)
-        # except Exception as e:
-        # print(f"{colors['FAIL']}An exception occured. Details: \n{e}", end="")
-        # print(f"{colors['WHITE']}")
 
     def addVar(self, line):
-        # print("addVar() method invoked!")
         self.line = line.strip()
         ls = None
         try:
