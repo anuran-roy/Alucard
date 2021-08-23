@@ -30,7 +30,7 @@ class ExecutionEngine(SessionData, Wolfram):
         if self.line in self.environment_commands.keys():
             return exec(self.environment_commands[self.line])
         elif self.line[:self.line.find(" ")] == self.config['WOLFRAM']:
-            return self.session.evaluate(self.line[self.line.find(" ")+1:].strip())
+            return self.wolfram_run(self.line[self.line.find(" ")+1:].strip())
         else:
             return exec(self.line)
 
