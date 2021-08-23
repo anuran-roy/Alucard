@@ -18,7 +18,7 @@ class SessionData:
 
     def addHistory(self, line):
         self.line = line.strip()
-        print("addHistory() method invoked!")
+        # print("addHistory() method invoked!")
         # ls = None
         # if "<-" in self.line:
         #     ls = line.split("<-")

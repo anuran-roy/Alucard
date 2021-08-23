@@ -10,8 +10,8 @@ import yaml
 from sessiondata import SessionData
 from dracula import Wolfram
 from aesthetics import colors
+from subprocess import call
 import os
-
 
 class ExecutionEngine(SessionData, Wolfram):
     
@@ -19,8 +19,8 @@ class ExecutionEngine(SessionData, Wolfram):
         super(ExecutionEngine, self).__init__()
 
         self.environment_commands = {
-            "clear": "",
-            "exit": "",
+            "clear": "call('clear' if os.name =='posix' else 'cls')",
+            "exit": "sys.exit(0)",
 
         }
         # self.wolfram_commands = []
@@ -29,30 +29,38 @@ class ExecutionEngine(SessionData, Wolfram):
 
     def execute(self, to_exec):
         # try:
+        self.line = to_exec.strip()
         if self.line in self.environment_commands.keys():
             return exec(self.environment_commands[self.line])
-        elif self.line[:self.line.index(" ")] == self.config['WOLFRAM']:
-            return self.session.evaluate(self.line[self.line.index(" "):].strip())
+        # elif " " not in self.line:
+        #     return exec(self.line)
+        elif self.line[:self.line.find(" ")] == self.config['WOLFRAM']:
+            return self.session.evaluate(self.line[self.line.find(" ")+1:].strip())
         else:
-            return eval(self.line)
+            return exec(self.line)
         # except Exception as e:
-        print(f"{colors['FAIL']}An exception occured. Details: \n{e}", end="")
-        print(f"{colors['WHITE']}")
+        # print(f"{colors['FAIL']}An exception occured. Details: \n{e}", end="")
+        # print(f"{colors['WHITE']}")
 
     def addVar(self, line):
+        # print("addVar() method invoked!")
         self.line = line.strip()
         ls = None
         try:
             if "<-" in self.line:
-                ls = line.split("<-")
-                print(f"Assigning to {ls[1].strip()} an object {ls[0].strip()}...")
-                self.var[ls[0].strip()] = self.execute(ls[1].strip())
+                ls = [x.strip() for x in line.split("<-")]
+                print(f"Assigning {ls[1]} to object {ls[0]}...")
+                if self.execute(ls[1]) is None:
+                    self.var[ls[0]] = ls[1]
             else:
                 print(f"Executing without assignment...")
-                self.execute(line.strip())
+                if self.line not in self.environment_commands.keys(): 
+                    self.execute(f"print({self.line})")
+                else:
+                    self.execute(self.line)
         
             if ls is not None:
-                print(f"\n\n{colors['OKGREEN']}{ls[0].strip()} = {self.var[ls[0].strip()]}\n")
+                print(f"\n\n{colors['OKGREEN']}{ls[0]} = {self.var[ls[0]]}\n")
             
         except Exception as e:
             print(f"{colors['FAIL']}Error logging variable into the variable stack. Details: {e}")
