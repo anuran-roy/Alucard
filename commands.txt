@@ -1,0 +1,23 @@
+
+a <- 1
+b <- 2
+c <- 3
+history
+
+a <- 5
+stack
+a <- int("hello")
+
+a <- int("hello")
+a <- "hello"
+clear
+
+a <- "hello"
+
+"hello"
+a <- "hello"
+
+a <- "Hello"
+
+a <- "hello"
+$wolfram$
