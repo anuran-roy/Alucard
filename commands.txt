@@ -38,3 +38,15 @@ a <- "hello"
 "hello"
 a <- "helloL
 a <- "hello"
+
+$wolfram$ 2^2
+
+clear
+$wolfram$ 2^2
+
+
+a <- 5
+b <- "hello"
+stack
+a <- "5"
+stack

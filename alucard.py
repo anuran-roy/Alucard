@@ -6,11 +6,16 @@ sys.path.append(str(package_root_directory))
 
 from transylvania import ExecutionEngine
 from voice import Speech2Command
-from dracula import Wolfram
-from aesthetics import colors
+# from dracula import Wolfram
+from aesthetics import colors, sequence, quotes
+from random import randint
 
 engine = ExecutionEngine()
+
 print("\n")
+
+print(sequence[randint(0,len(sequence)-1)])
+print(f"\n\n{quotes[randint(0,len(quotes)-1)]}")
 while True:
     try:
         print(f"\n{colors['WHITE']}Alucard > ", end='')
