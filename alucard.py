@@ -20,10 +20,10 @@ while True:
     try:
         print(f"\n{colors['WHITE']}Alucard > ", end='')
         cmd = input()
-        # engine.addHistory(cmd)
+        engine.sessiondata.addHistory(cmd)
         engine.addVar(cmd)
     except KeyboardInterrupt:
-        # engine.saveHistory()
-        engine.session.terminate()
+        engine.sessiondata.saveHistory()
+        engine.wolfram.session.terminate()
         print(f"{colors['WARNING']}\n\nCtrl + C pressed! Exiting Alucard...\n")
         break

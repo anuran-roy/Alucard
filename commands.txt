@@ -1,0 +1,9 @@
+
+history
+a <- "hello"
+b <- "Hi"
+history
+stack
+$wolfram$ Integrate[3*x^2, {x, 1, 3}]
+$walpha$ obi wan kenobi
+history
