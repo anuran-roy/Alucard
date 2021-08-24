@@ -16,7 +16,7 @@ class SessionData:
         self.history = open("commands.txt", "r").read().split("\n")
         self.var = {}
         self.line = None
-
+    
     def addHistory(self, line):
         self.line = line.strip()
         self.history.append(line)
