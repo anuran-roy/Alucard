@@ -6,7 +6,7 @@ from wolframclient.language import wl, wlexpr
 class Wolfram:
 
     def __init__(self):
-        print("Wolfram Class Initialized")
+        print("Starting the Wolfram Engine...")
         self.session = WolframLanguageSession()
         print("Wolfram Engine Started")
 
@@ -14,3 +14,6 @@ class Wolfram:
         print("Returning evaluated value...\n")
         return self.session.evaluate(wlexpr(expr))
 
+    def walpha_run(self, expr):
+        print("Fetching results...\n")
+        return self.session.evaluate(wl.WolframAlpha(expr, "Result"))

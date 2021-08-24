@@ -2,16 +2,17 @@ import json
 from pprint import pprint
 
 import sys  
-from pathlib import Path  
-file = Path(__file__). resolve()  
-package_root_directory = file.parents [1]  
-sys.path.append(str(package_root_directory))
+# from pathlib import Path  
+# file = Path(__file__). resolve()  
+# package_root_directory = file.parents [1]  
+# sys.path.append(str(package_root_directory))
 
 from aesthetics import colors
 
 class SessionData:
 
     def __init__(self):
+        print("Initialized SessionData Object")
         self.history = open("commands.txt", "r").read().split("\n")
         self.var = {}
         self.line = None
